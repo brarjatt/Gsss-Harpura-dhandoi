@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM SHRI Government Senior Secondary School, Harpura Dhandoi</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans Gurmukhi for crisp English & Punjabi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans Gurmukhi"', 'sans-serif'],
+            punjabi: ['"Noto Sans Gurmukhi"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            schoolBlue: '#1E3A8A',
+            schoolDarkBlue: '#172554',
+            schoolAmber: '#F59E0B',
+            schoolCream: '#FFFBEB',
+            schoolEmerald: '#065F46',
+            schoolGreen: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Gurmukhi', sans-serif;
+      background: linear-gradient(135deg, #EFF6FF 0%, #FEFCE8 50%, #ECFDF5 100%);
+      overflow-x: hidden;
+    }
+
+    .punjabi-text {
+      font-family: 'Noto Sans Gurmukhi', 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.65;
+    }
+
+    /* Smooth Slide Transitions */
+    .slide-container {
+      display: none;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-container.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Custom subtle glass card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 12px 32px -6px rgba(30, 58, 138, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 selection:bg-amber-200 selection:text-blue-950">
+
+  <!-- Top Interactive Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      
+      <!-- Brand / School Mini Header -->
+      <div class="flex items-center gap-2.5 cursor-pointer" onclick="goToSlide(0)">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-900 to-blue-700 flex items-center justify-center text-amber-300 shadow-md shrink-0">
+          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">PM SHRI</span>
+            <span class="hidden sm:inline text-xs font-semibold text-emerald-700">• Excellence in Education</span>
+          </div>
+          <h1 class="text-sm sm:text-base font-extrabold text-blue-950 leading-tight">
+            Govt. Sr. Sec. School, Harpura Dhandoi
+          </h1>
+        </div>
+      </div>
+
+      <!-- 5-Page Pill Stepper Navigation -->
+      <nav aria-label="Slide navigation" class="order-3 lg:order-2 w-full lg:w-auto flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-1 lg:pb-0">
+        <button onclick="goToSlide(0)" id="nav-btn-0" class="nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 bg-blue-900 text-white shadow-sm">
+          <span>1. Welcome</span>
+        </button>
+        <button onclick="goToSlide(1)" id="nav-btn-1" class="nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-900">
+          <span>2. School Campus</span>
+        </button>
+        <button onclick="goToSlide(2)" id="nav-btn-2" class="nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-900">
+          <span>3. Smart Studies</span>
+        </button>
+        <button onclick="goToSlide(3)" id="nav-btn-3" class="nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-900">
+          <span>4. Gym & Coaches</span>
+        </button>
+        <button onclick="goToSlide(4)" id="nav-btn-4" class="nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-900">
+          <span>5. Why Join & Thanks</span>
+        </button>
+      </nav>
+
+      <!-- Utility Controls: Auto-Play & Share -->
+      <div class="order-2 lg:order-3 flex items-center gap-2">
+        <button id="autoplay-btn" onclick="toggleAutoPlay()" title="Auto-play presentation" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 flex items-center gap-1.5 transition">
+          <i data-lucide="play" id="autoplay-icon" class="w-3.5 h-3.5"></i>
+          <span id="autoplay-label" class="hidden sm:inline">Auto-Play</span>
+        </button>
+        <button onclick="shareSchoolLink()" title="Share presentation link" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex items-center gap-1.5 transition">
+          <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+          <span>Share</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Top Progress Bar -->
+    <div class="w-full h-1 bg-slate-200">
+      <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-800 via-amber-500 to-emerald-600 transition-all duration-500" style="width: 20%;"></div>
+    </div>
+  </header>
+
+  <!-- Toast Notification Box (Replaces alert) -->
+  <div id="toast-box" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2.5 px-5 py-3 rounded-2xl bg-slate-900 text-white text-sm font-semibold shadow-2xl border border-slate-700">
+    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+    <span id="toast-message">Link copied to clipboard!</span>
+  </div>
+
+  <!-- Main Interactive Slide Stage -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- ========================================================= -->
+    <!-- SLIDE 1: WELCOME, SCHOOL BRANDING & INSPIRATIONAL QUOTES  -->
+    <!-- ========================================================= -->
+    <section id="slide-0" class="slide-container active">
+      <div class="glass-card rounded-3xl overflow-hidden">
+        <!-- Hero Banner -->
+        <div class="bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900 text-white p-6 sm:p-10 md:p-12 relative overflow-hidden">
+          <!-- Decorative Glowing Orbs -->
+          <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col lg:flex-row items-center gap-8">
+            <!-- Left Content -->
+            <div class="flex-1 text-center lg:text-left">
+              <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-4">
+                <span class="px-3.5 py-1 rounded-full bg-amber-400 text-blue-950 font-extrabold text-xs tracking-wider uppercase shadow">
+                  PM SHRI Schools Initiative
+                </span>
+                <span class="px-3 py-1 rounded-full bg-white/15 text-amber-200 font-semibold text-xs border border-white/20">
+                  Learn • Grow
+                </span>
+              <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-5">
+                <em>"A School Where Dreams Take Flight!"</em> — Empowering young minds with smart digital classrooms, dedicated mentors, modern sports & fitness, and strong moral values.
+              </p>
+
+              <!-- School Contact Details (Phone & Email) -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-6 text-xs sm:text-sm font-bold">
+                <a href="tel:1234" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-amber-200 border border-white/20 transition">
+                  <i data-lucide="phone" class="w-4 h-4 text-amber-300"></i>
+                  <span>1234</span>
+                </a>
+                <a href="mailto:abc@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-emerald-200 border border-white/20 transition">
+                  <i data-lucide="mail" class="w-4 h-4 text-emerald-300"></i>
+                  <span>abc@gmail.com</span>
+                </a>
+              </div>
+
+              <!-- Quick CTA Buttons -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <button onclick="goToSlide(1)" class="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-blue-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber-500/25 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                  <span>Explore Our Campus</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <button onclick="goToSlide(4)" class="px-5 py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-sm sm:text-base border border-white/25 flex items-center gap-2 transition">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                  <span>Why Choose Us?</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Emblem Card (Inspired by School Gate & Crest) -->
+            <div class="w-full max-w-xs sm:max-w-sm shrink-0">
+              <div class="rounded-3xl bg-white/10 backdrop-blur-md border border-white/25 p-6 text-center shadow-2xl">
+                <!-- Custom SVG School Crest -->
+                <svg viewBox="0 0 220 150" class="w-44 h-32 mx-auto mb-3 drop-shadow-md">
+                  <defs>
+                    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#FDE047"/>
+                      <stop offset="100%" stop-color="#F59E0B"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Rising Sun Rays -->
+                  <circle cx="110" cy="68" r="32" fill="url(#sunGrad)" />
+                  <g stroke="#FDE047" stroke-width="3.5" stroke-linecap="round">
+                    <line x1="110" y1="14" x2="110" y2="26"/>
+                    <line x1="72" y1="26" x2="80" y2="35"/>
+                    <line x1="148" y1="26" x2="140" y2="35"/>
+                    <line x1="54" y1="54" x2="66" y2="57"/>
+                    <line x1="166" y1="54" x2="154" y2="57"/>
+                  </g>
+                  <!-- Open Book -->
+                  <path d="M45 78 Q78 65 110 82 Q142 65 175 78 L175 126 Q142 113 110 130 Q78 113 45 126 Z" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="4"/>
+                  <line x1="110" y1="82" x2="110" y2="130" stroke="#1E3A8A" stroke-width="3.5"/>
+                  <path d="M58 92 Q82 84 102 94 M58 106 Q82 98 102 108 M162 92 Q138 84 118 94 M162 106 Q138 98 118 108" stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-extrabold tracking-widest uppercase mb-1.5">
+                  Come To Learn • Go To Serve
+                </div>
+                <p class="punjabi-text text-sm font-bold text-white">
+                  “ਦੇਹ ਸਿਵਾ ਬਰ ਮੋਹਿ ਇਹੈ ਸੁਭ ਕਰਮਨ ਤੇ ਕਬਹੂੰ ਨ ਟਰੋਂ”
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inspiring Quotes Grid for Parents & Students -->
+        <div class="p-6 sm:p-9 bg-white">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+              <i data-lucide="quote" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-blue-950">
+              Words of Inspiration for Parents & Students
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Quote 1 (For Parents - English & Punjabi) -->
+            <div class="rounded-2xl p-5 bg-gradient-to-br from-amber-50 to-orange-50/60 border border-amber-200/80 shadow-sm">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-full">
+                For Caring Parents • ਮਾਪਿਆਂ ਲਈ ਸੰਦੇਸ਼
+              </span>
+              <p class="mt-3 text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                “The greatest gift you can give your child is not wealth, but a quality education that builds character, confidence, and a bright future.”
+              </p>
+              <p class="punjabi-text mt-2.5 text-sm sm:text-base font-semibold text-blue-950 border-t border-amber-200/70 pt-2.5">
+                “ਤੁਸੀਂ ਆਪਣੇ ਬੱਚੇ ਨੂੰ ਜੋ ਸਭ ਤੋਂ ਕੀਮਤੀ ਤੋਹਫ਼ਾ ਦੇ ਸਕਦੇ ਹੋ, ਉਹ ਹੈ ਮਿਆਰੀ ਸਿੱਖਿਆ — ਜੋ ਉਸਦਾ ਚਰਿੱਤਰ, ਆਤਮ-ਵਿਸ਼ਵਾਸ ਅਤੇ ਸੁਨਹਿਰੀ ਭਵਿੱਖ ਬਣਾਉਂਦੀ ਹੈ।”
+              </p>
+            </div>
+
+            <!-- Quote 2 (For Students - English & Punjabi) -->
+            <div class="rounded-2xl p-5 bg-gradient-to-br from-blue-50 to-indigo-50/60 border border-blue-200/80 shadow-sm">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-900 bg-blue-200/60 px-2.5 py-0.5 rounded-full">
+                For Ambitious Students • ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਪ੍ਰੇਰਨਾ
+              </span>
+              <p class="mt-3 text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                “Dream big, work hard, and let your curiosity lead the way—every great achiever once started in a classroom just like yours!”
+              </p>
+              <p class="punjabi-text mt-2.5 text-sm sm:text-base font-semibold text-emerald-900 border-t border-blue-200/70 pt-2.5">
+                “ਵੱਡੇ ਸੁਪਨੇ ਦੇਖੋ, ਸਖ਼ਤ ਮਿਹਨਤ ਕਰੋ ਅਤੇ ਅੱਗੇ ਵਧੋ — ਹਰ ਮਹਾਨ ਇਨਸਾਨ ਦੀ ਕਾਮਯਾਬੀ ਦੀ ਸ਼ੁਰੂਆਤ ਇੱਕ ਚੰਗੇ ਸਕੂਲ ਤੋਂ ਹੀ ਹੁੰਦੀ ਹੈ!”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SLIDE 2: SCHOOL CAMPUS & SAFE ENVIRONMENT                 -->
+    <!-- ========================================================= -->
+    <section id="slide-1" class="slide-container">
+      <div class="glass-card rounded-3xl p-6 sm:p-9">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7 border-b border-slate-200 pb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase tracking-wider mb-2">
+              <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Page 2 • Our School Campus
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-blue-950">
+              Spacious, Clean & Safe School Campus
+            </h2>
+            <p class="punjabi-text text-base sm:text-xl font-bold text-emerald-700 mt-1">
+              ਸਾਫ਼-ਸੁਥਰਾ, ਸੁਰੱਖਿਅਤ ਅਤੇ ਸ਼ਾਨਦਾਰ ਸਕੂਲ ਕੈਂਪਸ
+            </p>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-xs">
+            Tap <strong>"Replace Photo"</strong> on any card below to insert your own phone photos directly into this view.
+          </p>
+        </div>
+
+        <!-- 3 Campus Showcase Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-7">
+          
+          <!-- Campus Card 1: Iconic Entrance Gate -->
+          <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md flex flex-col group">
+            <div class="relative h-52 bg-sky-100 overflow-hidden" id="campus-photo-box-1">
+              <svg viewBox="0 0 400 240" class="w-full h-full object-cover" id="campus-svg-1">
+                <rect width="400" height="175" fill="#DBEAFE"/>
+                <rect y="175" width="400" height="65" fill="#E5C5B5"/>
+                <rect x="45" y="42" width="310" height="34" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+                <text x="200" y="64" text-anchor="middle" fill="#1E3A8A" font-weight="800" font-size="14">ਸਰਕਾਰੀ ਸੀਨੀ. ਸੈਕੰ. ਸਕੂਲ ਹਰਪੁਰਾ-ਧੰਦੋਈ</text>
+                <rect x="75" y="76" width="38" height="104" fill="#93C5FD" stroke="#1E3A8A" stroke-width="1.5"/>
+                <rect x="287" y="76" width="38" height="104" fill="#93C5FD" stroke="#1E3A8A" stroke-width="1.5"/>
+                <text x="94" y="112" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">COME</text>
+                <text x="94" y="124" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">TO</text>
+                <text x="94" y="136" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">LEARN</text>
+                <text x="306" y="112" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">GO</text>
+                <text x="306" y="124" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">TO</text>
+                <text x="306" y="136" text-anchor="middle" fill="#DC2626" font-weight="800" font-size="9">SERVE</text>
+                <rect x="115" y="102" width="84" height="78" fill="#EA580C" stroke="#9A3412" stroke-width="1.5"/>
+                <rect x="201" y="102" width="84" height="78" fill="#F97316" stroke="#9A3412" stroke-width="1.5"/>
+              </svg>
+              <img id="campus-img-1" class="hidden w-full h-full object-cover" alt="School Main Entrance Gate" />
+              <label class="absolute bottom-2.5 right-2.5 cursor-pointer px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-900 text-white text-xs font-bold backdrop-blur-sm flex items-center gap-1.5 shadow">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Replace Photo</span>
+                <input type="file" accept="image/*" class="hidden" onchange="handleCampusUpload(event, 1)" />
+              </label>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-extrabold text-blue-950 text-base mb-1">Grand Welcoming Entrance</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Inspiring motto <em>"Come to Learn, Go to Serve"</em> with neat interlocking brick pathways and secure campus boundaries.
+                </p>
+              </div>
+              <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-emerald-700">
+                <i data-lucide="shield-check" class="w-4 h-4"></i> Safe & Disciplined Campus
+              </span>
+            </div>
+          </div>
+
+          <!-- Campus Card 2: Yellow & Blue Academic Wing -->
+          <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md flex flex-col group">
+            <div class="relative h-52 bg-blue-50 overflow-hidden" id="campus-photo-box-2">
+              <svg viewBox="0 0 400 240" class="w-full h-full object-cover" id="campus-svg-2">
+                <rect width="400" height="175" fill="#DBEAFE"/>
+                <rect y="175" width="400" height="65" fill="#E2E8F0"/>
+                <rect x="25" y="45" width="350" height="130" fill="#FEF3C7" stroke="#1E3A8A" stroke-width="2"/>
+                <rect x="25" y="45" width="350" height="14" fill="#1E3A8A"/>
+                <rect x="25" y="105" width="350" height="14" fill="#1E3A8A"/>
+                <rect x="25" y="162" width="350" height="13" fill="#1E3A8A"/>
+                <rect x="85" y="59" width="10" height="103" fill="#1E3A8A"/>
+                <rect x="165" y="59" width="10" height="103" fill="#1E3A8A"/>
+                <rect x="245" y="59" width="10" height="103" fill="#1E3A8A"/>
+                <rect x="315" y="59" width="10" height="103" fill="#1E3A8A"/>
+                <rect x="115" y="122" width="170" height="24" rx="3" fill="#FACC15" stroke="#DC2626" stroke-width="1.5"/>
+                <text x="200" y="137" text-anchor="middle" fill="#B91C1C" font-weight="800" font-size="9.5">ਪੀ.ਐਮ. ਸ਼੍ਰੀ ਸਰਕਾਰੀ ਸੀਨੀਅਰ ਸੈਕੰਡਰੀ ਸਕੂਲ</text>
+              </svg>
+              <img id="campus-img-2" class="hidden w-full h-full object-cover" alt="Academic Courtyard Building" />
+              <label class="absolute bottom-2.5 right-2.5 cursor-pointer px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-900 text-white text-xs font-bold backdrop-blur-sm flex items-center gap-1.5 shadow">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Replace Photo</span>
+                <input type="file" accept="image/*" class="hidden" onchange="handleCampusUpload(event, 2)" />
+              </label>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-extrabold text-blue-950 text-base mb-1">Spacious Academic Wings</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Clean, airy two-story classrooms painted with uplifting moral & motivational quotes in Punjabi, Hindi, and English.
+                </p>
+              </div>
+              <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-800">
+                <i data-lucide="building-2" class="w-4 h-4"></i> Clean & Well-Maintained Classrooms
+              </span>
+            </div>
+          </div>
+
+          <!-- Campus Card 3: Upper Trees for Greenery & Assembly Area Below -->
+          <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md flex flex-col group">
+            <div class="relative h-52 bg-emerald-50 overflow-hidden" id="campus-photo-box-3">
+              <svg viewBox="0 0 400 240" class="w-full h-full object-cover" id="campus-svg-3">
+                <rect width="400" height="165" fill="#BAE6FD"/>
+                <!-- Upper Trees for Greenery -->
+                <ellipse cx="70" cy="75" rx="45" ry="60" fill="#166534"/>
+                <ellipse cx="145" cy="65" rx="40" ry="58" fill="#15803D"/>
+                <ellipse cx="215" cy="62" rx="42" ry="60" fill="#14532D"/>
+                <ellipse cx="285" cy="68" rx="44" ry="56" fill="#15803D"/>
+                <ellipse cx="350" cy="80" rx="40" ry="52" fill="#166534"/>
+                <!-- School Building Wing -->
+                <rect x="15" y="118" width="370" height="48" fill="#FEF3C7" stroke="#1E3A8A" stroke-width="1.5"/>
+                <rect x="15" y="118" width="370" height="8" fill="#1E3A8A"/>
+                <!-- Covered Stage Canopy -->
+                <polygon points="120,115 200,98 280,115" fill="#FDE047" stroke="#1E3A8A" stroke-width="1.5"/>
+                <rect x="130" y="115" width="140" height="51" fill="#F8FAFC" stroke="#1E3A8A" stroke-width="1.5"/>
+                <!-- Assembly Area on Down Side -->
+                <rect y="166" width="400" height="74" fill="#E7C6B6"/>
+                <path d="M0 185 H400 M0 205 H400 M0 225 H400" stroke="#C89F8B" stroke-width="1.5" stroke-dasharray="10 6"/>
+              </svg>
+              <img id="campus-img-3" class="hidden w-full h-full object-cover" alt="Assembly Area with Upper Trees" />
+              <label class="absolute bottom-2.5 right-2.5 cursor-pointer px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-900 text-white text-xs font-bold backdrop-blur-sm flex items-center gap-1.5 shadow">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Replace Photo</span>
+                <input type="file" accept="image/*" class="hidden" onchange="handleCampusUpload(event, 3)" />
+              </label>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-extrabold text-blue-950 text-base mb-1">Assembly Area & Green Tree Line</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  On the upper side, tall trees provide natural greenery and fresh shade, while down below is our spacious paved <strong>assembly area</strong> for morning prayers and student activities.
+                </p>
+              </div>
+              <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-emerald-700">
+                <i data-lucide="trees" class="w-4 h-4"></i> Upper Greenery & Open Assembly Area
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Campus Highlights Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-emerald-50/90 border border-emerald-200 rounded-2xl p-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="tree-pine" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-extrabold text-emerald-950">Natural Greenery</p>
+              <p class="text-[11px] text-emerald-800">Shaded & pollution-free</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-800 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="shield" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-extrabold text-blue-950">Safe Environment</p>
+              <p class="text-[11px] text-blue-800">Caring & disciplined</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-extrabold text-amber-950">Clean Premises</p>
+              <p class="text-[11px] text-amber-800">Interlocking paved yards</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-700 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-extrabold text-indigo-950">Assembly Area</p>
+              <p class="text-[11px] text-indigo-800">Spacious morning ground</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SLIDE 3: MODERN ACADEMICS & SMART TECHNOLOGY              -->
+    <!-- ========================================================= -->
+    <section id="slide-2" class="slide-container">
+      <div class="glass-card rounded-3xl p-6 sm:p-9">
+        <!-- Header -->
+        <div class="mb-7 border-b border-slate-200 pb-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-extrabold uppercase tracking-wider mb-2">
+            <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Page 3 • Modern Studies & Smart Tech
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-blue-950">
+            Smart Classrooms, Practical Learning & Expert Staff
+          </h2>
+          <p class="punjabi-text text-base sm:text-xl font-bold text-blue-700 mt-1">
+            ਆਧੁਨਿਕ ਤਕਨੀਕ, ਪ੍ਰੈਕਟੀਕਲ ਸਿੱਖਿਆ ਅਤੇ ਤਜਰਬੇਕਾਰ ਅਧਿਆਪਕ
+          </p>
+        </div>
+
+        <!-- 6 Feature Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          
+          <!-- 1. Mission Raftaar Projects -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-blue-50 to-white border border-blue-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-blue-900 text-amber-300 flex items-center justify-center mb-4 shadow">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-blue-950 mb-1.5">Mission Raftaar Projects</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Accelerated, focused learning missions that help every student grasp core concepts rapidly and achieve top exam performance.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-blue-800 bg-blue-100/70 px-3 py-1.5 rounded-lg">
+              ਮਿਸ਼ਨ ਰਫ਼ਤਾਰ ਰਾਹੀਂ ਤੇਜ਼ ਅਤੇ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਪੜ੍ਹਾਈ
+            </p>
+          </div>
+
+          <!-- 2. Practical English Learning (RCA & Interactive Website) -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mb-4 shadow">
+              <i data-lucide="globe" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-emerald-950 mb-1.5">Practical English (RCA & Web)</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Real-world spoken & written English through <strong>RCA (Reading, Comprehension & Application)</strong> projects and dedicated practical learning websites.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-lg">
+              RCA ਪ੍ਰੋਜੈਕਟਾਂ ਅਤੇ ਵੈੱਬਸਾਈਟ ਰਾਹੀਂ ਪ੍ਰੈਕਟੀਕਲ ਅੰਗਰੇਜ਼ੀ
+            </p>
+          </div>
+
+          <!-- 3. Latest Computers, LED Panels & Projector Classes -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-amber-50 to-white border border-amber-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-blue-950 flex items-center justify-center mb-4 shadow">
+              <i data-lucide="monitor-play" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900 mb-1.5">Computers, LED & Projectors</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Latest computer labs, interactive <strong>smart LED panels</strong>, and <strong>projector-enabled classrooms</strong> making complex lessons visual and easy.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-amber-900 bg-amber-100/80 px-3 py-1.5 rounded-lg">
+              ਨਵੀਨਤਮ ਕੰਪਿਊਟਰ, LED ਪੈਨਲ ਅਤੇ ਪ੍ਰੋਜੈਕਟਰ ਕਲਾਸਾਂ
+            </p>
+          </div>
+
+          <!-- 4. Well-Educated, Polite & Caring Staff -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-indigo-50 to-white border border-indigo-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-800 text-white flex items-center justify-center mb-4 shadow">
+              <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-indigo-950 mb-1.5">Polite & Highly Qualified Staff</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Our faculty members are exceptionally well-educated, intelligent, polite, and deeply dedicated to nurturing each student with patience.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-indigo-800 bg-indigo-100/70 px-3 py-1.5 rounded-lg">
+              ਬਹੁਤ ਹੀ ਸਤਿਕਾਰਯੋਗ, ਨਿਮਰ ਅਤੇ ਉੱਚ-ਯੋਗਤਾ ਪ੍ਰਾਪਤ ਸਟਾਫ਼
+            </p>
+          </div>
+
+          <!-- 5. Bagless Day & Joyful Learning -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-rose-50 to-white border border-rose-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center mb-4 shadow">
+              <i data-lucide="palette" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-rose-950 mb-1.5">Bagless Day & Creative Fun</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Regular <strong>Bagless Days</strong> filled with hands-on activities, art, quizzes, and skill workshops so students learn joyfully without stress.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-rose-800 bg-rose-100/70 px-3 py-1.5 rounded-lg">
+              ਬੈਗਲੈੱਸ ਡੇ (Bagless Day) ਅਤੇ ਰਚਨਾਤਮਕ ਗਤੀਵਿਧੀਆਂ
+            </p>
+          </div>
+
+          <!-- 6. Science, Maths & Skill-Based Learning -->
+          <div class="rounded-2xl p-5 bg-gradient-to-br from-teal-50 to-white border border-teal-200 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center mb-4 shadow">
+              <i data-lucide="flask-conical" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-teal-950 mb-1.5">Science, Maths & Skill Labs</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-2">
+              Practical Science & Mathematics experiments paired with NEP-aligned skill-based education to prepare students for future careers.
+            </p>
+            <p class="punjabi-text text-xs font-bold text-teal-800 bg-teal-100/70 px-3 py-1.5 rounded-lg">
+              ਸਾਇੰਸ, ਗਣਿਤ ਪ੍ਰਯੋਗਸ਼ਾਲਾਵਾਂ ਅਤੇ ਹੁਨਰ-ਆਧਾਰਿਤ ਸਿੱਖਿਆ
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SLIDE 4: SPORTS, GYM & DEDICATED COACHES                  -->
+    <!-- ========================================================= -->
+    <section id="slide-3" class="slide-container">
+      <div class="glass-card rounded-3xl p-6 sm:p-9">
+        <!-- Header -->
+        <div class="mb-7 border-b border-slate-200 pb-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase tracking-wider mb-2">
+            <i data-lucide="trophy" class="w-3.5 h-3.5"></i> Page 4 • Fitness, Sports & Leadership
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-blue-950">
+            School Gym, Professional Coaches & Extracurriculars
+          </h2>
+          <p class="punjabi-text text-base sm:text-xl font-bold text-amber-700 mt-1">
+            ਸਕੂਲ ਜਿਮ, ਮਾਹਿਰ ਖੇਡ ਕੋਚ ਅਤੇ ਸਹਿ-ਵਿਦਿਅਕ ਗਤੀਵਿਧੀਆਂ
+          </p>
+        </div>
+
+        <!-- Highlight Banner: Dedicated Coaches & On-Campus Gym -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          
+          <!-- Dedicated Sports Coaches Card -->
+          <div class="rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-blue-900 to-blue-800 text-white shadow-lg relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-10">
+              <i data-lucide="medal" class="w-44 h-44"></i>
+            </div>
+            <div class="relative z-10">
+              <span class="inline-block px-3 py-1 rounded-full bg-amber-400 text-blue-950 text-xs font-extrabold uppercase tracking-wider mb-3">
+                Specialized Training
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">
+                Dedicated Sports Coaches — Not Just Teachers!
+              </h3>
+              <p class="punjabi-text text-base sm:text-lg font-bold text-amber-300 mb-3">
+                ਵਿਦਿਆਰਥੀਆਂ ਦੀ ਖੇਡ ਪ੍ਰਤਿਭਾ ਨਿਖਾਰਨ ਲਈ ਵਿਸ਼ੇਸ਼ ਖੇਡ ਕੋਚ (Sports Coaches) ਮੌਜੂਦ ਹਨ!
+              </p>
+              <p class="text-sm sm:text-base text-blue-100 leading-relaxed mb-4">
+                We believe every young athlete deserves expert mentorship. Our dedicated <strong>Sports Coaches</strong> train students systematically in athletics, team sports, stamina, and sportsmanship for block, district, and state tournaments.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-bold">
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">Athletics & Track</span>
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">Team Games</span>
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">District & State Prep</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- On-Campus School Gym Card -->
+          <div class="rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-emerald-800 to-teal-900 text-white shadow-lg relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-10">
+              <i data-lucide="dumbbell" class="w-44 h-44"></i>
+            </div>
+            <div class="relative z-10">
+              <span class="inline-block px-3 py-1 rounded-full bg-emerald-300 text-emerald-950 text-xs font-extrabold uppercase tracking-wider mb-3">
+                Health & Strength
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">
+                Modern On-Campus School Gym
+              </h3>
+              <p class="punjabi-text text-base sm:text-lg font-bold text-emerald-200 mb-3">
+                ਤੰਦਰੁਸਤ ਸਰੀਰ ਵਿੱਚ ਹੀ ਤੰਦਰੁਸਤ ਦਿਮਾਗ ਦਾ ਵਾਸ ਹੁੰਦਾ ਹੈ — ਸਕੂਲ ਵਿੱਚ ਆਧੁਨਿਕ ਹੈਲਥ ਜਿਮ!
+              </p>
+              <p class="text-sm sm:text-base text-emerald-50 leading-relaxed mb-4">
+                Our school features its very own dedicated <strong>Health & Fitness Gym</strong>, encouraging students to build physical strength, immunity, discipline, and an active lifestyle right on campus under safe supervision.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-bold">
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">Fitness Equipment</span>
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">Guided Workouts</span>
+                <span class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20">Youth Wellness</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Additional Extracurriculars Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl p-4 bg-slate-50 border border-slate-200 flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center shrink-0">
+              <i data-lucide="flag" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-blue-950 text-sm sm:text-base">NCC & NSS Programmes</h4>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Developing leadership, patriotism, social service, and self-discipline through active NCC & NSS wings.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-4 bg-slate-50 border border-slate-200 flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+              <i data-lucide="mic-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-blue-950 text-sm sm:text-base">Cultural & Stage Confidence</h4>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Bhangra, Giddha, public speaking, debates, and morning assembly anchoring to build fearless communicators.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-4 bg-slate-50 border border-slate-200 flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-blue-950 text-sm sm:text-base">All-Round Personality</h4>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Equal focus on mind, body, and character so every student shines in academics as well as life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SLIDE 5: DON'T MISS OUT (NEGATIVE TO POSITIVE) & THANKS   -->
+    <!-- ========================================================= -->
+    <section id="slide-4" class="slide-container">
+      <div class="glass-card rounded-3xl p-6 sm:p-9">
+        
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-7">
+          <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-extrabold uppercase tracking-wider mb-2">
+            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Page 5 • Make The Right Choice Today
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-blue-950">
+            Don’t Let Your Child Miss This Golden Opportunity!
+          </h2>
+          <p class="punjabi-text text-lg sm:text-2xl font-extrabold text-rose-700 mt-1">
+            ਕਿਤੇ ਤੁਹਾਡਾ ਬੱਚਾ ਇਹਨਾਂ ਸੁਨਹਿਰੀ ਮੌਕਿਆਂ ਤੋਂ ਵਾਂਝਾ ਨਾ ਰਹਿ ਜਾਵੇ!
+          </p>
+        </div>
+
+        <!-- Negative-to-Positive Punjabi Quotes Banner -->
+        <div class="rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50 to-emerald-50 border-2 border-amber-300 p-5 sm:p-6 mb-7 shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </div>
+              <p class="punjabi-text text-base sm:text-lg font-extrabold text-slate-900">
+                “ਜੇਕਰ ਤੁਸੀਂ ਆਪਣੇ ਬੱਚੇ ਨੂੰ ਇੱਥੇ ਦਾਖਲ ਨਹੀਂ ਕਰਵਾਉਂਦੇ, ਤਾਂ ਉਹ <span class="text-rose-700 underline decoration-amber-400">ਸਮਾਰਟ LED ਕਲਾਸਾਂ, ਪ੍ਰੈਕਟੀਕਲ ਅੰਗਰੇਜ਼ੀ (RCA), ਮਿਸ਼ਨ ਰਫ਼ਤਾਰ, ਜਿਮ ਅਤੇ ਵਿਸ਼ੇਸ਼ ਖੇਡ ਕੋਚਾਂ</span> ਵਰਗੀਆਂ ਬਿਹਤਰੀਨ ਸਹੂਲਤਾਂ ਤੋਂ ਵਾਂਝਾ ਰਹਿ ਸਕਦਾ ਹੈ — <span class="text-emerald-800">ਅੱਜ ਹੀ ਸਹੀ ਕਦਮ ਚੁੱਕੋ ਅਤੇ ਆਪਣੇ ਬੱਚੇ ਨੂੰ ਕਾਮਯਾਬੀ ਦੇ ਰਾਹ ਤੋਰੋ!</span>”
+              </p>
+            </div>
+            <div class="border-t border-amber-200/80 pt-3 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-700 text-white flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+              </div>
+              <p class="punjabi-text text-base sm:text-lg font-bold text-blue-950">
+                “ਕਿਤੇ ਦੇਰ ਨਾ ਹੋ ਜਾਵੇ! ਮਹਿੰਗੀਆਂ ਪ੍ਰਾਈਵੇਟ ਫੀਸਾਂ ਦੇ ਬੋਝ ਦੀ ਬਜਾਏ, <span class="text-blue-800 font-extrabold">PM SHRI ਸਰਕਾਰੀ ਸੀਨੀਅਰ ਸੈਕੰਡਰੀ ਸਕੂਲ, ਹਰਪੁਰਾ ਧੰਦੋਈ</span> ਵਿੱਚ ਦਾਖਲਾ ਕਰਵਾ ਕੇ ਆਪਣੇ ਬੱਚੇ ਦਾ ਸੁਨਹਿਰੀ ਭਵਿੱਖ ਸੁਰੱਖਿਅਤ ਕਰੋ।”
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side-by-Side Comparison: What You Lose vs. What Your Child Gains -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          
+          <!-- Left: What You Miss Without Enrolling -->
+          <div class="rounded-2xl p-5 bg-rose-50/80 border border-rose-200">
+            <div class="flex items-center gap-2.5 mb-3 text-rose-800">
+              <i data-lucide="x-circle" class="w-6 h-6 shrink-0"></i>
+              <h3 class="font-extrabold text-base sm:text-lg">If You Don't Enroll Here, You Miss:</h3>
+            </div>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">✕</span>
+                <span>Missing out on <strong>PM SHRI National-Level Smart Infrastructure</strong> & modern digital labs.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">✕</span>
+                <span>Losing hands-on <strong>Practical English (RCA)</strong> & <strong>Mission Raftaar</strong> accelerated growth.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">✕</span>
+                <span>Missing dedicated <strong>Sports Coaches & On-Campus Gym</strong> fitness training.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">✕</span>
+                <span>Paying heavy fees elsewhere instead of receiving superior, caring mentorship right here.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: What Your Child Gains Here -->
+          <div class="rounded-2xl p-5 bg-emerald-50/90 border border-emerald-300 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-3 text-emerald-900">
+              <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+              <h3 class="font-extrabold text-base sm:text-lg">When You Join Us, Your Child Gains:</h3>
+            </div>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-800 font-semibold">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-extrabold">✓</span>
+                <span><strong>Smart LED Panels, Projectors & Latest Computers</strong> for 21st-century learning.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-extrabold">✓</span>
+                <span><strong>Polite, Highly Educated & Dedicated Teachers</strong> who treat every child like family.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-extrabold">✓</span>
+                <span><strong>Bagless Days, NCC/NSS, Gym & Expert Coaches</strong> for complete personality & fitness.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-extrabold">✓</span>
+                <span>A <strong>Safe, Lush Green, Disciplined Campus</strong> where dreams truly take flight!</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Warm Thank You Note Card (Requested Closing Note) -->
+        <div class="rounded-3xl bg-gradient-to-br from-blue-950 via-blue-900 to-emerald-950 text-white p-6 sm:p-8 text-center shadow-xl border border-blue-800 relative overflow-hidden">
+          <div class="max-w-3xl mx-auto relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-amber-400 text-blue-950 flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
+            </div>
+            <h3 class="text-xl sm:text-3xl font-extrabold text-amber-300 mb-2">
+              Thank You for Visiting! • ਤਹਿ ਦਿਲੋਂ ਧੰਨਵਾਦ!
+            </h3>
+            <p class="text-sm sm:text-base text-blue-100 leading-relaxed mb-3">
+              Thank you for taking the time to view this presentation and explore <strong>PM SHRI Government Senior Secondary School, Harpura Dhandoi</strong>. We warmly invite parents and students to visit our campus, meet our faculty, and take the first step toward a bright, successful future!
+            </p>
+            <p class="punjabi-text text-sm sm:text-lg font-bold text-emerald-200 mb-6">
+              ਇਸ ਪੇਸ਼ਕਾਰੀ ਨੂੰ ਦੇਖਣ ਲਈ ਆਪ ਸਭ ਮਾਪਿਆਂ ਅਤੇ ਵਿਦਿਆਰਥੀਆਂ ਦਾ ਬਹੁਤ-ਬਹੁਤ ਧੰਨਵਾਦ। ਅਸੀਂ ਤੁਹਾਨੂੰ ਆਪਣੇ ਸਕੂਲ ਕੈਂਪਸ ਵਿੱਚ ਆਉਣ ਅਤੇ ਆਪਣੇ ਬੱਚੇ ਦੇ ਸੁਨਹਿਰੀ ਭਵਿੱਖ ਦੀ ਸ਼ੁਰੂਆਤ ਕਰਨ ਲਈ ਨਿੱਘਾ ਸੱਦਾ ਦਿੰਦੇ ਹਾਂ।
+              <br/>
+              <span class="text-amber-300 text-sm sm:text-base">— ਧੰਨਵਾਦ ਸਹਿਤ, ਪ੍ਰਿੰਸੀਪਲ ਅਤੇ ਸਮੂਹ ਸਟਾਫ਼, PM SHRI ਸਰਕਾਰੀ ਸੀਨੀਅਰ ਸੈਕੰਡਰੀ ਸਕੂਲ, ਹਰਪੁਰਾ ਧੰਦੋਈ</span>
+            </p>
+
+            <!-- Final Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <button onclick="shareSchoolLink()" class="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-blue-950 font-extrabold text-sm flex items-center gap-2 shadow-lg transition">
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+                <span>Share This Presentation</span>
+              </button>
+              <button onclick="goToSlide(0)" class="px-5 py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-sm border border-white/25 flex items-center gap-2 transition">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                <span>Start From Page 1</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Persistent Slide Controls Bar -->
+  <footer class="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 py-3 px-4">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Previous Button -->
+      <button id="prev-btn" onclick="prevSlide()" class="px-4 sm:px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:pointer-events-none text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-1.5 transition">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        <span>Previous</span>
+      </button>
+
+      <!-- Dot Indicators & Counter -->
+      <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-1.5" id="slide-dots">
+          <button onclick="goToSlide(0)" aria-label="Go to slide 1" class="dot-btn w-7 h-2.5 rounded-full bg-blue-900 transition-all"></button>
+          <button onclick="goToSlide(1)" aria-label="Go to slide 2" class="dot-btn w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+          <button onclick="goToSlide(2)" aria-label="Go to slide 3" class="dot-btn w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+          <button onclick="goToSlide(3)" aria-label="Go to slide 4" class="dot-btn w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+          <button onclick="goToSlide(4)" aria-label="Go to slide 5" class="dot-btn w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+        </div>
+        <span id="slide-counter" class="text-xs font-extrabold text-slate-500 ml-1">1 / 5</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextSlide()" class="px-4 sm:px-6 py-2.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition">
+        <span id="next-btn-text">Next Page</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Presentation Logic -->
+  <script>
+    // Initialize Lucide icons safely
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    let currentSlide = 0;
+    const totalSlides = 5;
+    let autoPlayInterval = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    // Navigate to specific slide (0 to 4)
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentSlide = index;
+
+      // Update slide visibility
+      for (let i = 0; i < totalSlides; i++) {
+        const slideEl = document.getElementById(`slide-${i}`);
+        const navBtn = document.getElementById(`nav-btn-${i}`);
+        if (slideEl) {
+          if (i === currentSlide) {
+            slideEl.classList.add('active');
+          } else {
+            slideEl.classList.remove('active');
+          }
+        }
+        if (navBtn) {
+          if (i === currentSlide) {
+            navBtn.className = 'nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 bg-blue-900 text-white shadow-sm';
+          } else {
+            navBtn.className = 'nav-pill px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-900';
+          }
+        }
+      }
+
+      // Update dot indicators
+      const dots = document.querySelectorAll('.dot-btn');
+      dots.forEach((dot, i) => {
+        if (i === currentSlide) {
+          dot.className = 'dot-btn w-7 h-2.5 rounded-full bg-blue-900 transition-all';
+        } else {
+          dot.className = 'dot-btn w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all';
+        }
+      });
+
+      // Update progress bar & counter
+      const progressBar = document.getElementById('progress-bar');
+      if (progressBar) {
+        progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+      }
+      const counterEl = document.getElementById('slide-counter');
+      if (counterEl) {
+        counterEl.textContent = `${currentSlide + 1} / ${totalSlides}`;
+      }
+
+      // Update Previous / Next button states
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const nextBtnText = document.getElementById('next-btn-text');
+
+      if (prevBtn) {
+        prevBtn.disabled = currentSlide === 0;
+      }
+      if (nextBtn && nextBtnText) {
+        if (currentSlide === totalSlides - 1) {
+          nextBtnText.textContent = 'Finish';
+          nextBtn.disabled = true;
+          nextBtn.classList.add('opacity-50', 'pointer-events-none');
+        } else {
+          nextBtnText.textContent = 'Next Page';
+          nextBtn.disabled = false;
+          nextBtn.classList.remove('opacity-50', 'pointer-events-none');
+        }
+      }
+
+      // Smoothly scroll to top of page when switching slides
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextSlide(isAuto = false) {
+      if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+      } else if (isAuto) {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    // Auto-Play toggle
+    function toggleAutoPlay() {
+      const icon = document.getElementById('autoplay-icon');
+      const label = document.getElementById('autoplay-label');
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        if (icon) icon.setAttribute('data-lucide', 'play');
+        if (label) label.textContent = 'Auto-Play';
+        showToast('Auto-play paused');
+      } else {
+        autoPlayInterval = setInterval(() => {
+          nextSlide(true);
+        }, 5500);
+        if (icon) icon.setAttribute('data-lucide', 'pause');
+        if (label) label.textContent = 'Pause';
+        showToast('Auto-play started (5.5s per page)');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Share presentation link / invite text
+    function shareSchoolLink() {
+      const shareText = "Explore PM SHRI Government Senior Secondary School, Harpura Dhandoi — Smart Classrooms, Mission Raftaar, Practical English (RCA), School Gym & Sports Coaches: " + window.location.href;
+      const tempInput = document.createElement('textarea');
+      tempInput.value = shareText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast('School link & details copied! Ready to paste & share.');
+      } catch (err) {
+        showToast('Copy the page URL from your browser bar to share!');
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    // Custom non-blocking toast notification
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toastBox = document.getElementById('toast-box');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toastBox || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toastBox.classList.remove('hidden');
+      toastBox.classList.add('flex');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastBox.classList.add('hidden');
+        toastBox.classList.remove('flex');
+      }, 3200);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Touch Swipe Support for Mobile (strictly horizontal swipes, ignores vertical scrolling)
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      const swipeThreshold = 80;
+
+      // Only trigger slide change if horizontal movement is much greater than vertical scrolling
+      if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+        if (deltaX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // Allow user to replace campus SVG illustrations with their own phone photos locally
+    function handleCampusUpload(event, cardNumber) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgEl = document.getElementById(`campus-img-${cardNumber}`);
+        const svgEl = document.getElementById(`campus-svg-${cardNumber}`);
+        if (imgEl && svgEl) {
+          imgEl.src = e.target.result;
+          imgEl.classList.remove('hidden');
+          svgEl.classList.add('hidden');
+          showToast(`Campus photo ${cardNumber} updated!`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Initialize first slide state cleanly on load
+    goToSlide(0);
+  </script>
+</body>
+</html>
